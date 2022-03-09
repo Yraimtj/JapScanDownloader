@@ -1,5 +1,5 @@
 import sys
-from .jsd_selenium import JapScanDownloader
+from jsd_selenium import JapScanDownloader
 
 
 def main():

@@ -18,7 +18,7 @@ from PIL import Image
 from io import BytesIO
 import sys
 
-from .helpers import (
+from helpers import (
     get_arguments,
     get_config,
     create_pdf,
@@ -26,7 +26,7 @@ from .helpers import (
     process_browser_log_entry,
 )
 
-JAPSCAN_URL = "https://www.japscan.to"
+JAPSCAN_URL = "https://www.japscan.ws"
 
 logger = logging.getLogger(__name__)
 
@@ -194,8 +194,9 @@ class JapScanDownloader:
 
             chapters = []
 
-            for chapter_tag in self.driver.find_elements_by_css_selector(
-                "div.chapters_list.text-truncate a"
+            for chapter_tag in self.driver.find_elements(by=By.CSS_SELECTOR, 
+                        value="div.chapters_list.text-truncate a"
+                
             ):
                 chapter = {}
                 chapter["url"] = chapter_tag.get_attribute("href")
@@ -234,7 +235,8 @@ class JapScanDownloader:
 
         page_options = []
 
-        for page_options_tag in pages.find_elements_by_css_selector("option"):
+        for page_options_tag in pages.find_elements(by=By.CSS_SELECTOR, 
+                        value="option"):
             page_options.append(page_options_tag.get_attribute("value"))
 
         pages_progress_bar = tqdm(
